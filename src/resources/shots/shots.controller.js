@@ -12,9 +12,10 @@ exports.index = function*(next) {
 };
 
 exports.shot = function*(next) {
-
-	var url = decodeURIComponent(this.params.sid);
-	var imgPath = path.resolve(global.imgRoot, this.params.sid + '.jpg');
+	var self = this;
+	var body = this.request.body;
+	var url = body.sid;
+	var imgPath = path.resolve(global.imgRoot, encodeURIComponent(body.sid) + '.jpg');
 
 
 	if (!fs.existsSync(imgPath)) {
@@ -39,7 +40,7 @@ function lazyLoadPage(doneCallback, url, imgPath) {
 					ph.exit();
 					doneCallback();
 				});
-			}
+			};
 
 			var count = 0, forcedRenderTimeout, renderTimeout;
 

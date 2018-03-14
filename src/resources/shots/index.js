@@ -2,7 +2,7 @@
 
 var controller = require('./shots.controller');
 var router = require('koa-router')();
+var koaBody = require('koa-body')();
 
-router.get('/', controller.index);
-router.get('/:sid', controller.shot);
+router.post('/', koaBody, controller.shot);
 module.exports = router.routes();
